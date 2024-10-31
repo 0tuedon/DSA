@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@0tuedon/bitcoin_rpcjs": "^1.0.0"
+  }
+}
