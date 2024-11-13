@@ -24,7 +24,7 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 
 function isPalindrome(s) {
   let removeExtraCharacters = s
-    .replace(/[^\w]+/gi, "")
+    .replace(/[^\w\d]+/gi, "")
     .trim()
     .toLowerCase();
   let checkString = "";
@@ -48,4 +48,4 @@ function isPalindrome(s) {
 }
 
 isPalindrome("race a car");
-console.log(isPalindrome(""));
+console.log(isPalindrome("A man, a plan, a canal: Panama"));
