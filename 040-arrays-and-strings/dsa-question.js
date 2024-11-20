@@ -27,8 +27,18 @@ function firstRecurringCharacter(input) {
   }
 }
 
+const firstRecurr = (input) => {
+    const store = {};
+    for(item of input) {
+        if(store.hasOwnProperty(item)) return item;
+        store[`${item}`] = 1;
+    }
+    return undefined;
+}
+
 console.log(firstRecurringCharacter([2,1,1,2,3,5,1,2,4]));
 
+console.log(firstRecurr([2,1,1,2,3,5,1,2,4]));
 //Bonus... What if we had this:
 // [2,5,5,2,3,5,1,2,4]
 // return 5 because the pairs are before 2,2
