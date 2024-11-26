@@ -1,4 +1,4 @@
-// Create Linked List 
+// Create Linked List
 /* 
 - Spaced Repetition
 -
@@ -13,133 +13,108 @@
 // console.log("2", obj2)
 
 //creating pur first linked list
-// make a linked list that 10-->5-->16
+// make a linked list that 10-->5-->16->20-> null;
+//  10-->2->5-->16->20-> null;
 
-
-let myLinkedList = {
-  head: {
-    value: 10,
-    next: {
-      value: 5,
-      next: {
-        value: 16,
-        next: null
-      }
-    }
-  }
-};
-
-//  Creating a Linked List 
-class NewNode {
-  constructor(value){
-    this.value = value
-    this.next = null
-  }
-}
 class SinglyLinkedList {
-  constructor(value){
-    this.head = {
+  // We want to create a pointer to this value
+
+  constructor(value) {
+    this.linkHead = {
       value,
-      next: null
-    }
-    this.tail = this.head
-    this.length = 1
+      next: null,
+    };
+    this.linkTail = this.linkHead;
+    this.length = 1;
   }
 
-  append(value){
-    const newNode = {
-      value: value,
-      next: null
-    }
-    this.tail.next = newNode
-    this.tail =  newNode
-    this.length++
-    return this
-  }
-  prepend(value){
-    const newNode = new NewNode(value)
-    newNode.next = this.head
-    this.head = {...newNode}
-    this.length++;
-    return this
-  }
-  insert (index, value){
-    let currentObj = this.head.next
-    for(let i= 0; i < index; i++){
-      currentObj = currentObj.next
-      if(i === index-1){
-        
-      }
-    }
-    return this
-  }
-
-}
-
-const testSingleList = new SinglyLinkedList(20)
-
-
-
-// After Learning about Insert
-
-class LinkedList {
-  constructor(value){
-    this.head ={
-      value,
-      next: null
-    }
-    this.tail = this.head
-    this.length = 1
-  }
+  //  Add a value after the last element on linkedList
   append(value) {
-    // to the last of the linked list
-      let newNode = {
-        value,
-        next: null
-      }
-      this.tail.next =  newNode
-      //  we should have only one tail
-      this.tail = newNode
-      this.length++
-      return this
+    const newNode = {
+      value,
+      next: null,
+    };
+    //  because tail is always going to be the last element in the link list and it usually doesn't have any pointers
+    this.linkTail.next = newNode;
+    // since we assigned
+    this.linkTail = newNode;
+    this.length++;
+    return this;
   }
 
   prepend(value) {
     const newNode = {
       value,
-      next: this.head
-    }
-    this.head = newNode
+      next: this.linkHead,
+    };
+    this.linkHead = newNode;
     this.length++;
-    return this
+    return this;
   }
 
- #traverseList(index) {
-    let counter = 0;
-    let currentNode = this.head
-
-    while (counter !== index){
-      currentNode = currentNode.next
-
-      counter ++
-    }
-  return currentNode;
-  }
-  insert (index, value){
+  insert(index, value) {
     const newNode = {
       value,
-      next: null
+      next: null,
+    };
+    if (index === 0) {
+      this.prepend(value);
+      return this;
     }
-   let firstToIndex  =   this.#traverseList(index -1)
-   const holdPointer = firstToIndex.next  
-   firstToIndex.next = newNode
-   newNode.next = holdPointer
-    console.log(JSON.stringify(this))
+    if (index === this.length) {
+      this.append(value);
+      return this;
+    }
+
+    let counter = 0;
+    let currentNode = this.linkHead;
+
+    while (counter < index - 1) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+
+    //  we want to set the new node to pointer to after the index where we would insert it
+    newNode.next = currentNode.next;
+    // and have the node before it point to the newNode
+    currentNode.next = newNode;
+    return this.linkHead;
+  }
+
+  delete(index) {
+    if (index >= this.length) return this.linkHead;
+    let counter = 0;
+    let currentNode = this.linkHead;
+
+    while (counter <= index - 1) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    let deletingValue;
+    // We want to hold the actual value that we want to delete
+    if (index === 0) {
+      deletingValue = currentNode;
+      let holdPointer = deletingValue.next;
+      // then set the node before the deleted value to point to the holder after the deleted value;
+      currentNode = holdPointer;
+    } else {
+      deletingValue = currentNode.next;
+      let holdPointer = deletingValue.next;
+      // then set the node before the deleted value to point to the holder after the deleted value;
+      currentNode.next = holdPointer;
+    }
+
+    return this.linkHead;
   }
 }
 
-const afterLearningLinkedList = new LinkedList(20)
-afterLearningLinkedList.append(13)
-afterLearningLinkedList.append(12)
-afterLearningLinkedList.prepend(8)
-afterLearningLinkedList.insert(2,15)
+const singlyLL = new SinglyLinkedList(10);
+// console.log("10-->2-->8-->5-->16->20-->null", "linkedlist");
+singlyLL.append(8);
+singlyLL.append(5);
+singlyLL.append(16);
+singlyLL.append(20);
+singlyLL.insert(1, 2);
+singlyLL.delete(100);
+
+console.log(JSON.stringify(singlyLL.linkHead));
