@@ -117,4 +117,5 @@ singlyLL.append(20);
 singlyLL.insert(1, 2);
 singlyLL.delete(100);
 
-console.log(JSON.stringify(singlyLL.linkHead));
+// console.log(JSON.stringify(singlyLL.linkHead));
+
