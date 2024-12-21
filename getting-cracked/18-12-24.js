@@ -43,7 +43,7 @@ function isPalindrome(x) {
 
   for (let index = 0; index < numberStore.length; index++) {
     sumOfPalindrome +=
-      numberStore[index] * 10 ** (numberStore.length - (index + 1));
+      numberStore[index] * (10 ** (numberStore.length - (index + 1)));
   }
   if (x === sumOfPalindrome) {
     return true;
@@ -51,4 +51,19 @@ function isPalindrome(x) {
   return false;
 }
 
-console.log(isPalindrome(121));
+// console.log(isPalindrome(121));
+
+function isPalindromeBetter(x) {
+  if (Math.sign(x) === -1) return false;
+  let number = x;
+  let sumOfPalindrome = 0;
+
+  while (number >= 1) {
+    sumOfPalindrome = sumOfPalindrome * 10 + Math.floor(number % 10);
+    number = Math.floor(number / 10);
+  }
+
+  return x === sumOfPalindrome;
+}
+
+console.log(isPalindromeBetter(-121));

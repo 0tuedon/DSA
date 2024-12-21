@@ -25,20 +25,19 @@ function maxSubArraySum(integerArray, n) {
 
 // Solving with sliding window
 
-function maxSubArraySumSliding(integerArray, n){
-    let maxSum = 0;
-    for(let i = 0; i < n; i++){
-      maxSum += integerArray[i]
+function maxSubArraySumSliding(integerArray, n) {
+  let maxSum = 0;
+  for (let i = 0; i < n; i++) {
+    maxSum += integerArray[i];
+  }
+
+  for (let index = n; index < integerArray.length; index++) {
+    let tempSum = maxSum - integerArray[index - n] + integerArray[index];
+    if (tempSum > maxSum) {
+      maxSum = tempSum;
     }
-
-   for (let index = n; index < integerArray.length; index++) {
-        let tempSum =  maxSum - integerArray[index - n] + integerArray[index]
-        if(tempSum > maxSum){
-        maxSum = tempSum
-        }
-   }
-   return maxSum;
+  }
+  return maxSum;
 }
-
 
 console.log(maxSubArraySumSliding([1, 2, 3, 4, 5], 3));
