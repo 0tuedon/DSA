@@ -18,15 +18,15 @@ function findLongestSubstring(stringArg) {
   let start = 0;
   let end = 0;
   let maxLen = 0;
-  let tempNum = 0;
   let setStore = {};
-  while (end <= stringArg.length) {
-    if (setStore[stringArg[end]] || setStore[stringArg[end]] === 0) {
-      storedIndex = setStore[stringArg[end]];
-      start = storedIndex + 1;
+  while (end < stringArg.length) {
+    let currChar = stringArg[end];
+    if (setStore[currChar]) {
+      start = Math.max(start, setStore[currChar]);
     }
-    setStore[stringArg[end]] = end;
     maxLen = Math.max(maxLen, end - start + 1);
+    setStore[currChar] = end + 1;
+
     end++;
   }
 
