@@ -104,37 +104,55 @@ class LinkedList {
   insert(index, value) {
     if (index < 0 || index > this.length) return false;
     let newNode = new NewNode(value);
-    if ((index === 0)) {
+    if (index === 0) {
       this.unshift(newNode);
-      this.length++
+      this.length++;
       return true;
-    } else if ((index === this.length)) {
+    } else if (index === this.length) {
       this.push(newNode);
-      this.length++
+      this.length++;
       return true;
     }
-    let curr = this.get(index-1);
+    let curr = this.get(index - 1);
     const indexAfter = this.get(index);
     newNode.next = indexAfter;
     curr.next = newNode;
-    this.length++
+    this.length++;
     return true;
   }
-  remove(index){
+  remove(index) {
     if (index < 0 || index >= this.length) return false;
-    if ((index === 0)) {
-      this.length--
-      return     this.shift();;
-    } else if ((index === this.length - 1)) {
-      this.length--
-      return   this.pop();
+    if (index === 0) {
+      this.length--;
+      return this.shift();
+    } else if (index === this.length - 1) {
+      this.length--;
+      return this.pop();
     }
-    let nodeRemoved  = this.get(index)
-    let prevNode = this.get(index-1);
-    const indexAfter = this.get(index+1);
+    let nodeRemoved = this.get(index);
+    let prevNode = this.get(index - 1);
+    const indexAfter = this.get(index + 1);
     prevNode.next = indexAfter;
-    this.length--
+    this.length--;
     return nodeRemoved;
+  }
+
+  reverse() {
+    // swap the head
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let prev = null; // PREV [100,200,300,400]
+    let next;
+    let count = 0;
+    while (count < this.length) {
+      next = node.next; //
+      node.next = prev;
+      prev = node;
+      node = next;
+      count++;
+    }
+    return this;
   }
 }
 
@@ -153,5 +171,5 @@ pushLinkedList.unshift(60);
 // pushLinkedList.pop();
 // pushLinkedList.pop();
 // pushLinkedList.pop();
-pushLinkedList.remove(2);
+pushLinkedList.reverse();
 console.log(JSON.stringify(pushLinkedList));
