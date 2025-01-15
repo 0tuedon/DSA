@@ -51,14 +51,15 @@ function merge(arr1, arr2){
   return results;
 }
 
-// console.log(mergeArrays([2, 14,99, 100],[1, 10, 50]));
+console.log(merge([1, 5, 3, 2], [4]));
 
 function mergeSort(arr) {
   if (arr.length <= 1) return arr;
   let mid = Math.floor(arr.length / 2);
-  let left = mergeSort(arr.slice(0, mid));
-  let right = mergeSort(arr.slice(mid));
+  let left = mergeSort(arr.slice(0, mid)); //[2,1] [2]
+  let right = mergeSort(arr.slice(mid)); // [99,100] [99]
+
   return merge(left, right);
 }
 
-console.log(mergeSort([2, 14, 99, 100, 50, 1, 6]));
+// console.log(mergeSort([2, 14, 99, 100, 50, 1, 6]));
