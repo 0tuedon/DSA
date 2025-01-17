@@ -88,7 +88,7 @@ class DoublyLinkedList {
     } else {
       let count = this.length - 1;
       let node = this.tail;
-      while (index <= count) {
+      while (index < count) {
         node = node.prev;
         count--;
       }
@@ -117,25 +117,45 @@ class DoublyLinkedList {
       newNode.prev = foundNode; // 1 <-> 2 <-3->  <-> 4 <-> 5
       newNode.next = foundNode.next;
       foundNode.next = newNode;
-      this.length++
+      this.length++;
     }
     return true;
   }
-  remove(index){
+  remove(index) {
     if (index >= this.length || index < 0) return false;
-    if(index == 0){
-      this.shift()
-    }
-    else if(index === this.length - 1) {
-        this.pop()
-    }
-    else {
-      let foundNode = this.get(index)
-      foundNode.prev.next =  foundNode.next
+    if (index == 0) {
+      this.shift();
+    } else if (index === this.length - 1) {
+      this.pop();
+    } else {
+      let foundNode = this.get(index);
+      foundNode.prev.next = foundNode.next;
       this.length--;
     }
 
-    return true
+    return true;
+  }
+
+  reverse(){
+    let currentNode = this.head
+    this.head = this.tail;
+    this.tail = currentNode;
+
+    let prevNode = null
+    let nextNode = null;
+    let count = 0;
+    while(count < this.length){
+      nextNode = currentNode.next;
+      currentNode.next = prevNode;
+      currentNode.prev = nextNode
+
+      prevNode = currentNode
+      currentNode = nextNode
+
+      count++
+    }
+
+    return this
   }
 }
 
@@ -151,9 +171,11 @@ doublyLinkedList.push(5);
 // 30 <-> 20 <-> 10 <-> 5
 // doublyLinkedList.get(3);
 // console.log(doublyLinkedList.set(1, 456));
-doublyLinkedList.insert(2,3);
+doublyLinkedList.insert(2, 3);
 // doublyLinkedList.remove(2)
-console.log(doublyLinkedList.head.next.next);
+doublyLinkedList.reverse()
+console.log(doublyLinkedList.head);
+
 // 1 <-> 2 <-3->  <-> 4 <-> 5
 // const doublyLinkedList = new DoublyLinkedList();
 // doublyLinkedList.push(20);

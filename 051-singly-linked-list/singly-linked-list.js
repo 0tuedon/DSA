@@ -138,21 +138,24 @@ class LinkedList {
   }
 
   reverse() {
-    // swap the head
-    let node = this.head;
-    this.head = this.tail;
-    this.tail = node;
-    let prev = null; // PREV [100,200,300,400]
-    let next;
-    let count = 0;
-    while (count < this.length) {
-      next = node.next; //
-      node.next = prev;
-      prev = node;
-      node = next;
-      count++;
+    let currentNode = this.head;
+    this.head= this.tail;
+    this.tail = currentNode
+
+    //  two variables nextNode and PrevNode
+    let nextNode = null;
+    let prevNode = null;
+    let count = 0
+    while(count < this.length){
+      nextNode = currentNode.next;
+      currentNode.prev = nextNode
+      currentNode.next = prevNode
+
+      prevNode = currentNode
+      currentNode = nextNode
+      count++
     }
-    return this;
+    return this
   }
 }
 
