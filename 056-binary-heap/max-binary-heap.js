@@ -7,6 +7,7 @@ class MaxBinaryHeap {
     this.values.push(element);
     this.bubbleUp();
   }
+  
   bubbleUp() {
     if (this.values.length <= 1) return;
     let length = this.values.length;
